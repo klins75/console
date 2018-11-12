@@ -101,7 +101,7 @@
     grid-area: 1 / 17 / span 1 / span 3; 
 }
 .legend7a {
-    grid-area: 1 / 20 / span 1 / span 5; 
+    grid-area: 1 / 20 / span 1 / span 5;  
 }
 .legend8  {
     grid-area: 2 / 17 / span 1 / span 3; 
@@ -185,5 +185,15 @@
     outline: none;
 }
 
-
+@media only screen and (min-width: 800px) {
+    .monitorLabel {font-size: calc(8px + (12 - 8) * ((100vw - 300px) / (1600 - 300))); font-weight: bold}
+ }
+ 
+ @media only screen and (min-width: 1000px) {
+    .monitorLabel {font-size: calc(10px + (14 - 10) * ((100vw - 300px) / (1600 - 300))); font-weight: bold}
+ }
+ 
+ @media only screen and (min-width: 1200px) {
+    .monitorLabel {font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1600 - 300))); font-weight: bold}
+ }
 
