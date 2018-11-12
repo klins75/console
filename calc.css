@@ -1,0 +1,95 @@
+
+* {
+    box-sizing: border-box
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0 0;
+    background-color:#996644;
+    display: flex; flex-direction:row;
+}
+#calculator {
+    display: flex; flex-direction:column; justify-content:space-between;
+    height: 80%; width:50%;
+}
+#display {
+    height:27.5%;width:100%;
+    background-color:#f0f0f0;font-size:6rem;color:#000044;
+    text-align:right;padding: 40px 20px 20px 20px;
+    border:10px solid #000044;
+}
+#filler {
+    height: 2.5%; width:100%;background-color:#000044;
+    }
+#keyPad {
+    height:70%; width:100%;
+    display: grid; grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(6, 16.66667%);
+    background-color:#000044;color:white;
+    border: 3px solid #000044;
+    }
+.numberButton {
+    background-color:#f0f0f0;font-size:2rem;border-radius:9%;
+    }
+.operator {
+    background-color:#e0e0e0;font-size:1.2rem;border-radius:12%;
+}
+.button2 {
+    background-color:#e0e0e0;font-size:1.2rem;border-radius:12%;
+}
+
+#button1 { grid-area: 5 / 1 / span 1 / span 1;}
+#button2 { grid-area: 5 / 2 / span 1 / span 1;}
+#button3 { grid-area: 5 / 3 / span 1 / span 1;}
+#button4 { grid-area: 4 / 1 / span 1 / span 1;}
+#button5 { grid-area: 4 / 2 / span 1 / span 1;}
+#button6 { grid-area: 4 / 3 / span 1 / span 1;}
+#button7 { grid-area: 3 / 1 / span 1 / span 1;}
+#button8 { grid-area: 3 / 2 / span 1 / span 1;}
+#button9 { grid-area: 3 / 3 / span 1 / span 1;}
+#button0 { grid-area: 6 / 1 / span 1 / span 2;}
+
+/* ________OPERATOR BUTTONS _________ */
+#point        { grid-area: 6 / 3 / span 1 / span 1; font-size:2rem; font-weight: bold;}
+#plus         { grid-area: 6 / 4 / span 1 / span 1; font-size:2rem; font-weight: bold;}
+#equals       { grid-area: 5 / 5 / span 2 / span 1; font-size:2rem; font-weight: bold;}
+#minus        { grid-area: 5 / 4 / span 1 / span 1; font-size:2rem; font-weight: bold;}
+#times        { grid-area: 4 / 4 / span 1 / span 1; font-size:2rem; font-weight: bold;}
+#divide       { grid-area: 3 / 4 / span 1 / span 1; font-size:2rem; font-weight: bold;}
+#invert       { grid-area: 4 / 5 / span 1 / span 1}
+#percent      { grid-area: 3 / 5 / span 1 / span 1}
+#squareRoot   { grid-area: 2 / 5 / span 1 / span 1}
+#back         { grid-area: 2 / 1 / span 1 / span 1}
+#clearEntry   { grid-area: 2 / 2 / span 1 / span 1}
+#memoryClear  { grid-area: 1 / 1 / span 1 / span 1}
+#memoryRecall { grid-area: 1 / 2 / span 1 / span 1}
+#memorySome   { grid-area: 1 / 3 / span 1 / span 1}
+#memoryPlus   { grid-area: 1 / 4 / span 1 / span 1}
+#memoryMinus  { grid-area: 1 / 5 / span 1 / span 1}
+#changeSign   { grid-area: 2 / 4 / span 1 / span 1}
+#clear        { grid-area: 2 / 3 / span 1 / span 1}
+
+/* _______________MONITOR_________________ */
+#monitor {
+height: 500px; width: 400px; background-color:gray;
+position: absolute; top: 10px; left: 500px;
+display: grid; grid-template-rows: repeat(10,10%);
+grid-template-columns: repeat(8, 12.5%);
+}
+.mons {border:1px solid black; background-color:lightgray; text-align:right; font-size:2rem;}
+#monOne{grid-area: 2 / 1 / span 1 / span 4;}
+#monTwo{grid-area: 2 / 5 / span 1 / span 4;}
+#monOneA{grid-area: 3 / 1 / span 1 / span 4;}
+#monTwoA{grid-area: 3 / 5 / span 1 / span 4;}
+#monThree{grid-area: 4 / 1 / span 1 / span 4;}
+#monThreeA{grid-area: 5 / 1 / span 1 / span 4;}
+#monFour{grid-area: 4 / 5 / span 1 / span 4;}
+#monFourA{grid-area: 5 / 5 / span 1 / span 4;}
+#monFive{grid-area: 6 / 1 / span 1 / span 4;}
+#monSix{grid-area: 6 / 5 / span 1 / span 4;}
+#monSeven{grid-area: 8 / 1 / span 1 / span 4;}
+#monEight{grid-area: 8 / 5 / span 1 / span 4;}
+#monNine{grid-area: 10 / 1 / span 1 / span 4;}
+#monTen{grid-area: 10 / 5 / span 1 / span 4;}

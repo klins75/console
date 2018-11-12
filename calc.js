@@ -1,0 +1,203 @@
+
+
+/* __________ARRAYS____________*/
+    keyPad    = document.getElementById('keyPad');
+    display   = document.getElementById('display');
+    decimal   = [];
+    decActive = 0;
+    keyMemory = [];
+    opType    = "";
+    entries   = [];
+    result    = [];
+    prevOp    = [];
+    memoryOne = [];
+
+/* ____ DISPLAYS ______*/
+    // let monOne = document.getElementById('monOne');
+    // let monThree = document.getElementById('monThree');
+    // let monFive = document.getElementById('monFive');
+    // let monSeven = document.getElementById('monSeven');
+    // let monNine = document.getElementById('monNine');
+    
+
+    
+   
+    // function metrics() {
+    //     monOne.innerHTML = keyMemory;
+    //     monOneScreenKey.innerHTML = "keyMemory[]";
+    //     monTwo.innerHTML = decimal;
+    //     monTwoScreenKey.innerHTML = "decimal[]";
+    //     monThree.innerHTML = decActive;
+    //     monThreeScreenKey.innerHTML = "decActive";
+    //     monFour.innerHTML = numberEntry();
+    //     monFourScreenKey.innerHTML = "numberEntry()";
+
+    //     // monOneA.innerHTML = decimal;
+    //     // monThree.innerHTML = decActive;
+    //     // monThreeA.innerHTML = entries;
+    //     // monFive.innerHTML = result;
+    //     // monSeven.innerHTML = memoryOne;
+    //     // monNine.innerHTML = numberEntry();
+    // }
+
+/* ______ MATH FUNCTIONS __________ */
+
+function displayC(a){
+    x = a.toFixed(2);
+display.innerHTML = x;
+}
+
+    
+function doMath() {
+	
+	switch(opType) {
+    	case 'add':
+        const sum = entries.reduce((total, amount) => total + amount);
+        return sum;
+        break;
+        case 'subtract':
+        const difference = entries.reduce((total, amount) => total - amount);
+        return difference;
+        break;
+        case 'multiply':
+        const product = entries.reduce((total, amount) => total * amount);
+        return product;
+        break;
+        case 'divide':
+        const quotient = entries.reduce((total, amount) => total / amount);
+        return quotient;
+        break;
+        default:
+        text = "shitTheBed";
+    }
+}
+
+let numberEntry = function() {
+    let copy = keyMemory.slice(length);
+    let nC   = copy.length, total = 0;
+    // if (decActive == 0){decimal.push(0)};
+    let decCopy = decimal.slice(length);
+    let nD   = decCopy.length, iC = -1;
+    
+        for (i = 0; i < nC; i ++){
+            sumArray = (copy.pop() * (Math.pow(10, i)));
+            total += sumArray;
+        };
+        
+        for (i = 0; i < nD; i ++) {
+            sumArray = (decCopy.shift() * (Math.pow(10, iC)));
+            total += sumArray;
+            iC --;
+        }
+    
+    return total;
+}
+
+function doStuff() {
+    if (numberEntry() != 0) {entries.push(numberEntry())};
+    if ((entries.length == 0)&&(result != 0)) { entries.push(result)};
+    doMath();
+    displayC(doMath());
+    result = doMath();
+    keyMemory.length = 0;
+    decimal.length   = 0;decActive = 0;
+    metrics();
+}
+function clearStuff() {
+    opType = "";
+    keyMemory.length = 0;
+    decimal.length   = 0;
+    decActive = 0;
+    metrics();
+}
+function doThings() {
+    doMath();
+    displayC(doMath());
+    result = doMath();
+    entries.length = 0;
+}
+
+
+keyPad.addEventListener('click', runEvent);
+//  -------------- RUN EVENT ------------------
+function runEvent(e) {
+
+    // RECORD NUMBER ENTRY --------------------
+    switch(e.target.id) {
+    	case 'plus':
+            opType = 'add';
+            doStuff()
+        break;
+     	
+        case 'minus':
+            opType = 'subtract';
+            doStuff()
+        break;
+        
+        case 'times':
+            opType = 'multiply';
+            doStuff()
+        break;
+        
+        case 'divide':
+            opType = 'divide';
+            doStuff()
+        break;
+        
+        case 'equals':
+            if (entries.length != 0) {
+            entries.push(numberEntry());
+            doThings() 
+            prevOp.length = 0;                                         
+            prevOp.push(numberEntry()); prevOp.push(opType); 
+            clearStuff();
+            } else if ((entries.length == 0)&&(prevOp.length != 0)) {
+                entries.push(result); entries.push(prevOp[0]); opType = prevOp[1];
+                doThings()
+                clearStuff();
+            } 
+        break;
+
+        case 'memoryPlus':
+            let x = Number(display.innerHTML);
+            memoryOne.length = 0;
+            memoryOne.push(x);
+            metrics();
+        break;
+
+        // case 'memoryRecall':
+
+        // metrics();
+        // break;
+        
+        case 'clearEntry':
+            keyMemory.length = 0;
+            decimal.length   = 0;
+            decActive        = 0;
+            entries.length   = 0;
+            prevOp.length    = 0;
+            opType           ='';
+            result = 0;
+            displayC(0);
+            metrics();
+        break;
+
+        case 'point':
+            decActive = 1;
+            metrics();
+        break;
+        
+        default:
+            let targetValue = e.target.value;
+            if (decActive == 1) {
+                decimal.push(targetValue)
+            } else if (decActive == 0) {
+                keyMemory.push(targetValue)
+            };
+            displayC(numberEntry());
+            metrics();
+            numberEntry();
+        break;
+        
+    }
+}
