@@ -65,7 +65,7 @@ function displayC(a){
     if (numDigits > 7) {
         let numSize = document.getElementById("display");
         numSize.style.fontSize = "5vh";
-        numSize.style.lineHeight = "3em";
+        // numSize.style.lineHeight = "3em";
         numSize.style.wordWrap = "break-word";
     } else {
         display.innerHTML = a
