@@ -97,18 +97,18 @@ function doStuff() {
     if (numberEntry() != 0) {entries.push(numberEntry())};
     if ((entries.length == 0)&&(result != 0)) { entries.push(result)};
     doMath();
-    displayC(doMath());
+    displayC(doMath()); // should this be inside of doMath()?
     result = doMath();
     keyMemory.length = 0;
     decimal.length   = 0;decActive = 0;
-    metrics();
+    // metrics();
 }
 function clearStuff() {
     opType = "";
     keyMemory.length = 0;
     decimal.length   = 0;
     decActive = 0;
-    metrics();
+    // metrics();
 }
 function doThings() {
     doMath();
@@ -121,6 +121,9 @@ function doThings() {
 keyPad.addEventListener('click', runEvent);
 //  -------------- RUN EVENT ------------------
 function runEvent(e) {
+
+    let onDisplay = Number(display.innerHTML);
+    let m1 = Number(memoryOne);
 
     // RECORD NUMBER ENTRY --------------------
     switch(e.target.id) {
@@ -147,28 +150,50 @@ function runEvent(e) {
         case 'equals':
             if (entries.length != 0) {
             entries.push(numberEntry());
-            doThings() 
+            doThings();
             prevOp.length = 0;                                         
             prevOp.push(numberEntry()); prevOp.push(opType); 
             clearStuff();
             } else if ((entries.length == 0)&&(prevOp.length != 0)) {
                 entries.push(result); entries.push(prevOp[0]); opType = prevOp[1];
-                doThings()
+                doThings();
                 clearStuff();
             } 
         break;
 
-        case 'memoryPlus':
-            let x = Number(display.innerHTML);
+        case 'memoryStore':
             memoryOne.length = 0;
-            memoryOne.push(x);
-            metrics();
+            memoryOne.push(onDisplay);
+            // metrics();
         break;
 
-        // case 'memoryRecall':
+        case 'memoryRecall':
+            if (memoryOne.length != 0) {
+            keyMemory.length = 0;
+            keyMemory.push(m1);
+            displayC(m1);
+            // metrics();
+            }
+        break;
 
-        // metrics();
-        // break;
+        case 'memoryClear':
+            memoryOne.length = 0;
+            // metrics();
+        break;
+
+        case 'memoryPlus':
+            let memSum = Number(memoryOne) + onDisplay;
+            memoryOne.length = 0;
+            memoryOne.push(memSum);
+            // metrics();
+        break;
+
+        case 'memoryMinus':
+            let memDiff = Number(memoryOne) - onDisplay;
+            memoryOne.length = 0;
+            memoryOne.push(memDiff);
+            // metrics();
+        break;
         
         case 'clearEntry':
             keyMemory.length = 0;
@@ -179,12 +204,12 @@ function runEvent(e) {
             opType           ='';
             result = 0;
             displayC(0);
-            metrics();
+            // metrics();
         break;
 
         case 'point':
             decActive = 1;
-            metrics();
+            // metrics();
         break;
         
         default:
@@ -195,9 +220,9 @@ function runEvent(e) {
                 keyMemory.push(targetValue)
             };
             displayC(numberEntry());
-            metrics();
+            // metrics();
             numberEntry();
         break;
         
-    }
+    } metrics();
 }
