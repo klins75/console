@@ -11,6 +11,7 @@
     result    = [];
     prevOp    = [];
     memoryOne = [];
+    numDigits = 0;
 
 /* ____ DISPLAYS ______*/
     // let monOne = document.getElementById('monOne');
@@ -42,9 +43,25 @@
 
 /* ______ MATH FUNCTIONS __________ */
 
+function digitCounter(x) {
+    x = Number(String(x).replace(/[^0-9]/g, ''));
+    return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1;
+}
+
 function displayC(a){
-    x = a.toFixed(2);
-display.innerHTML = x;
+    
+    // x = a.toFixed(2);
+    x = a;    
+    display.innerHTML = x;
+    onDisplay = Number(display.innerHTML);
+    numDigits = digitCounter(onDisplay);
+    if ((numDigits > 9) && (onDisplay > 1)) {
+        display.innerHTML = a.toFixed(0)
+    } else if ((numDigits > 9) && (onDisplay < 1)){
+        display.innerHTML = a.toFixed(8)
+    } else {
+        display.innerHTML = a
+    }
 }
 
     
@@ -116,6 +133,7 @@ function doThings() {
     result = doMath();
     entries.length = 0;
 }
+
 
 
 keyPad.addEventListener('click', runEvent);
@@ -195,7 +213,7 @@ function runEvent(e) {
             // metrics();
         break;
         
-        case 'clearEntry':
+        case 'clear':
             keyMemory.length = 0;
             decimal.length   = 0;
             decActive        = 0;
@@ -210,6 +228,32 @@ function runEvent(e) {
         case 'point':
             decActive = 1;
             // metrics();
+        break;
+
+        case 'clearEntry':
+            keyMemory.length = 0;
+            displayC(0);
+        break;
+
+        case 'invert':
+            let inverse = 1 / onDisplay;
+            displayC(inverse);
+        break;
+
+        case 'back':
+            keyMemory.pop();
+            displayC(numberEntry());
+        break;
+
+        case 'changeSign':
+            let negate = -1 * onDisplay;
+            displayC(negate);
+            if (keyMemory.length != 0) {
+                keyMemory.length = 0;
+                keyMemory.push(negate)
+            } else {
+                result = negate;
+            }
         break;
         
         default:

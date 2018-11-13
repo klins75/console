@@ -177,12 +177,12 @@ function metrics() {
     monEightL2.innerHTML        = "length: ";
     monEightL2k.innerHTML       = prevOp.length;
 
-    monNine.innerHTML           = "";
-    monNineScreenKey.innerHTML  = "";
+    monNine.innerHTML           = numDigits;
+    monNineScreenKey.innerHTML  = "# of digits";
     monNineL1.innerHTML         = "type: ";
-    monNineL1k.innerHTML        = '';
-    monNineL2.innerHTML         = "";
-    monNineL2k.innerHTML        = '';
+    monNineL1k.innerHTML        = typeof(numDigits);
+    monNineL2.innerHTML         = "length: ";
+    monNineL2k.innerHTML        = numDigits.length;
 
     monTen.innerHTML            = memoryOne;
     monTenScreenKey.innerHTML   = "memoryOne";
