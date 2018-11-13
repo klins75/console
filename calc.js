@@ -55,10 +55,17 @@ function displayC(a){
     display.innerHTML = x;
     onDisplay = Number(display.innerHTML);
     numDigits = digitCounter(onDisplay);
-    if ((numDigits > 9) && (onDisplay > 1)) {
-        display.innerHTML = a.toFixed(0)
-    } else if ((numDigits > 9) && (onDisplay < 1)){
-        display.innerHTML = a.toFixed(8)
+    // if ((numDigits > 9) && (onDisplay > 1)) {
+    //     display.innerHTML = a.toFixed(0)
+    // } else if ((numDigits > 9) && (onDisplay < 1)){
+    //     display.innerHTML = a.toFixed(8)
+    // } else {
+    //     display.innerHTML = a
+    // }
+    if (numDigits > 9) {
+        let numSize = document.getElementById("display");
+        numSize.style.fontSize = "5vh";
+        numSize.style.lineHeight = "3em";
     } else {
         display.innerHTML = a
     }
@@ -253,6 +260,17 @@ function runEvent(e) {
                 keyMemory.push(negate)
             } else {
                 result = negate;
+            }
+        break;
+
+        case 'squareRoot':
+            let sqrt = Math.sqrt(onDisplay);
+            displayC(sqrt);
+            if (keyMemory.length != 0) {
+                keyMemory.length = 0;
+                keyMemory.push(sqrt)
+            } else {
+                result = sqrt;
             }
         break;
         
